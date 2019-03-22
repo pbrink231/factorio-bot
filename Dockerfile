@@ -1,5 +1,10 @@
 FROM node:10-alpine
 
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+WORKDIR /app
 
-WORKDIR /home/node/app
+COPY package.json /app
+RUN npm install
+COPY . /app
+
+CMD node index.json
+EXPOSE 8081

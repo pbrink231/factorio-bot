@@ -1,0 +1,26 @@
+{
+  "name": "discord-facto-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "dotenv": "^7.0.0",
+    "simple-rcon": "^0.3.1",
+    "tail": "^2.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pbrink231/factorio-bot.git"
+  },
+  "author": "Peter Brink",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pbrink231/factorio-bot/issues"
+  },
+  "homepage": "https://github.com/pbrink231/factorio-bot#readme"
+}

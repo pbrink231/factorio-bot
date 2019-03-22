@@ -6,7 +6,7 @@ var Rcon = require('simple-rcon');
 
 // Factorio Direct Connect through RCON
 const {
-  DISCORD_SECRET_TOKEN,
+  DISCORD_BOT_TOKEN,
   DISCORD_FACTORIO_CHANNEL_ID
 } = process.env
 
@@ -36,11 +36,6 @@ factorio.on('authenticated', function() {
 // Discord Bot Setup
 const bot = new Bot();
 
-const {
-  DISCORD_SECRET_TOKEN,
-  DISCORD_FACTORIO_CHANNEL_ID
-} = process.env
-
 bot.on('ready', () => {
   console.log("I'm in");
   console.log(bot.user.username);
@@ -67,7 +62,7 @@ bot.on('error', error => {
   console.log('current bot: ', bot);
 });
 
-bot.login(DISCORD_SECRET_TOKEN);
+bot.login(DISCORD_BOT_TOKEN);
 
 
 // Reading log file
