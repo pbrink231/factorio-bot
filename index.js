@@ -2,18 +2,21 @@ require('dotenv').config()
 const { Client: Bot, RichEmbed } = require('discord.js');
 const Tail = require('tail').Tail;
 var Rcon = require('simple-rcon');
-
+var fs = require('fs');
 
 // Factorio Direct Connect through RCON
 const {
   DISCORD_BOT_TOKEN,
-  DISCORD_FACTORIO_CHANNEL_ID
+  DISCORD_FACTORIO_CHANNEL_ID,
+  FACTORIO_HOST,
+  FACTORIO_PORT,
+  FACTORIO_PASSWORD
 } = process.env
 
 var factorio = new Rcon({
-    host: 'localhost',
-    port: instanceconfig.clientPort, // port factorio listens after RCON connections on
-    password: instanceconfig.clientPassword, // RCON password
+    host: FACTORIO_HOST,
+    port: FACTORIO_PORT, // port factorio listens after RCON connections on
+    password: FACTORIO_PASSWORD, // RCON password
     timeout: 0
 });
 setTimeout(() => { factorio.connect(); }, 5000);
@@ -46,7 +49,7 @@ bot.on('message', msg => {
     console.log('got a new message from someone else');
     if (msg.content.includes('paul')) {
       msg.channel.send('I heard she is so fineeeee');
-    } else {
+    } else if (msg.content.includes('')) {
         msg.channel.send(msg.content.split('').reverse().join(''));
     }
   }
@@ -62,16 +65,23 @@ bot.on('error', error => {
   console.log('current bot: ', bot);
 });
 
-bot.login(DISCORD_BOT_TOKEN);
+bot.login(DISCORD_BOT_TOKEN)
+.catch(err => {
+  console.log('login to discord error', err)
+});
 
 
 // Reading log file
-var tail = new Tail("C:/Users/User/Documents/writetesting.txt");
-tail.watch()
-tail.on("line", data => {
-  if (data.includes('[CHAT]') || data.includes('[LEAVE]') || data.includes('[JOIN]')) {
-    bot.channels.get(DISCORD_FACTORIO_CHANNEL_ID).send(data);
-  }
-});
+const filepath = "C:/Users/User/Documents/writetesting.txt"
+if (fs.existsSync('/etc/file')) {
+  console.log('Found file');
+  var tail = new Tail(filepath);
+  tail.watch()
+  tail.on("line", data => {
+    if (data.includes('[CHAT]') || data.includes('[LEAVE]') || data.includes('[JOIN]')) {
+      bot.channels.get(DISCORD_FACTORIO_CHANNEL_ID).send(data);
+    }
+  });
+}
 
 console.log('done')
